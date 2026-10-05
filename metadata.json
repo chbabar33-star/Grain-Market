@@ -1,0 +1,6 @@
+{
+  "name": "Grain Market Software (غلہ منڈی سافٹ ویئر)",
+  "description": "Offline-first desktop and mobile Mandi ERP system for commission agents and grain traders. Features weighbridge First Weight costing, bilingual English and Urdu Nastaleeq, dual QuickBooks & BUSY style P&L, Action Centre, voucher printing, and Google Sheets backup.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

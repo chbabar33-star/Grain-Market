@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:GrainMarket.ViewModels"
+             xmlns:models="clr-namespace:GrainMarket.Models"
+             x:Class="GrainMarket.Views.SyncPage"
+             x:DataType="viewModels:SyncViewModel"
+             BackgroundColor="#F8FAFC"
+             Title="Auto-Sync &amp; Device Pairing">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- DEVICE PAIRING INFO -->
+            <Border BackgroundColor="#064E3B" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="16">
+                <VerticalStackLayout Spacing="6">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="DEVICE PAIRING &amp; CLOUD SYNC" TextColor="#A7F3D0" FontSize="11" FontAttributes="Bold" />
+                        <Border Grid.Column="1" BackgroundColor="#022C22" StrokeThickness="0" StrokeShape="RoundRectangle 6" Padding="8,2">
+                            <Label Text="{Binding DeviceRole}" TextColor="#34D399" FontSize="10" FontAttributes="Bold" />
+                        </Border>
+                    </Grid>
+
+                    <Label Text="Device ID: " TextColor="#D1FAE5" FontSize="11" />
+                    <Label Text="{Binding DeviceId}" TextColor="White" FontSize="13" FontAttributes="Bold" />
+
+                    <Label Text="Pairing Sync Key: " TextColor="#D1FAE5" FontSize="11" />
+                    <Label Text="{Binding SyncKey}" TextColor="White" FontSize="13" FontAttributes="Bold" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- MANUAL SYNC TRIGGER -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="14">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Current Status:" FontSize="11" TextColor="#64748B" FontAttributes="Bold" />
+                    <Label Text="{Binding SyncStatusText}" FontSize="14" FontAttributes="Bold" TextColor="#0F172A" />
+                    
+                    <Button Text="🔄 SYNC NOW (Manual Push/Pull)"
+                            Command="{Binding TriggerSyncCommand}"
+                            BackgroundColor="#059669"
+                            HeightRequest="46"
+                            FontSize="13"
+                            FontAttributes="Bold" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- PAIRING QR PAYLOAD DISPLAY -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="14">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Device Pairing Payload (Desktop Master QR):" FontSize="12" FontAttributes="Bold" TextColor="#0F172A" />
+                    <Label Text="Mobile APK scans this QR on first install to link to Desktop Master (Max 3 Mobiles per Business):" FontSize="11" TextColor="#64748B" />
+                    <Entry Text="{Binding PairingQrPayload}" IsReadOnly="True" BackgroundColor="#F1F5F9" FontSize="11" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- PENDING SYNC QUEUE -->
+            <Label Text="Pending Local Sync Queue (SQLite SyncQueue Table)" FontSize="13" FontAttributes="Bold" TextColor="#0F172A" />
+
+            <CollectionView ItemsSource="{Binding PendingQueue}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:SyncQueueItem">
+                        <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 10" Padding="10" Margin="0,0,0,6">
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <Label Grid.Column="0" Text="{Binding TableName}" FontAttributes="Bold" TextColor="#064E3B" FontSize="11" WidthRequest="90" />
+                                <Label Grid.Column="1" Text="{Binding Action}" TextColor="#B45309" FontSize="11" FontAttributes="Bold" />
+                                <Label Grid.Column="2" Text="{Binding QueuedAt, StringFormat='{0:HH:mm:ss}'}" FontSize="10" TextColor="#64748B" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

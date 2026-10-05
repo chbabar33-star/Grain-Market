@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:GrainMarket.ViewModels"
+             xmlns:models="clr-namespace:GrainMarket.Models"
+             x:Class="GrainMarket.Views.WeighbridgePage"
+             x:DataType="viewModels:WeighbridgeViewModel"
+             BackgroundColor="#F8FAFC"
+             Title="Weighbridge Entry">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="14">
+
+            <Border BackgroundColor="#064E3B" StrokeThickness="0" StrokeShape="RoundRectangle 12" Padding="14">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="کانٹا پرچی خریداری (Weighbridge First-Weight Slip)"
+                           TextColor="White"
+                           FontSize="15"
+                           FontAttributes="Bold" />
+                    <Label Text="Ticket cost calculated strictly on First Weight (Gross - Tare)"
+                           TextColor="#A7F3D0"
+                           FontSize="11" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- TICKET & VEHICLE -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="14">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Ticket #: " FontAttributes="Bold" FontSize="11" TextColor="#64748B" />
+                    <Entry Text="{Binding VoucherNo}" IsReadOnly="True" BackgroundColor="#F1F5F9" />
+
+                    <Label Text="Vehicle No (Trolley / Truck):" FontAttributes="Bold" FontSize="11" TextColor="#64748B" />
+                    <Entry Text="{Binding VehicleNo}" Placeholder="e.g. FDZ-8291" />
+
+                    <Label Text="Select Party (Farmer / Supplier):" FontAttributes="Bold" FontSize="11" TextColor="#64748B" />
+                    <Picker ItemsSource="{Binding Parties}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedParty}" />
+
+                    <Label Text="Commodity (Jins):" FontAttributes="Bold" FontSize="11" TextColor="#64748B" />
+                    <Picker ItemsSource="{Binding Items}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedItem}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- WEIGHT CALCULATIONS -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="14">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="First-Weight Costing Breakdown:" FontAttributes="Bold" FontSize="13" TextColor="#0F172A" />
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Gross Weight (KG):" FontSize="10" TextColor="#64748B" />
+                            <Entry Text="{Binding GrossWeight}" Keyboard="Numeric" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Tare Weight (KG):" FontSize="10" TextColor="#64748B" />
+                            <Entry Text="{Binding TareWeight}" Keyboard="Numeric" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Bags Count (بوری):" FontSize="10" TextColor="#64748B" />
+                            <Entry Text="{Binding Bags}" Keyboard="Numeric" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Deductions / Karda (KG):" FontSize="10" TextColor="#64748B" />
+                            <Entry Text="{Binding Deductions}" Keyboard="Numeric" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="First Weight (KG):" FontSize="10" TextColor="#64748B" />
+                            <Entry Text="{Binding FirstWeight, StringFormat='{0:N0}'}" IsReadOnly="True" BackgroundColor="#DCFCE7" TextColor="#166534" FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Clean Net Wt (KG):" FontSize="10" TextColor="#64748B" />
+                            <Entry Text="{Binding NetWeight, StringFormat='{0:N0}'}" IsReadOnly="True" BackgroundColor="#E2E8F0" FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Rate per 40KG (Maund):" FontSize="10" TextColor="#64748B" />
+                            <Entry Text="{Binding RatePer40Kg}" Keyboard="Numeric" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Net Total (PKR):" FontSize="10" TextColor="#64748B" />
+                            <Entry Text="{Binding TotalAmount, StringFormat='PKR {0:N0}'}" IsReadOnly="True" BackgroundColor="#FEF08A" TextColor="#854D0E" FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- SAVE BUTTON -->
+            <Button Text="💾 Save Ticket to Local SQLite"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#064E3B"
+                    HeightRequest="50"
+                    FontSize="14" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#065f46" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <linearGradient id="plate" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+
+  <!-- Outer subtle glow border -->
+  <rect x="12" y="12" width="488" height="488" rx="100" fill="none" stroke="#34d399" stroke-width="4" stroke-opacity="0.3" />
+
+  <!-- Center Scale / Weighbridge Beam -->
+  <g transform="translate(256, 210)">
+    <!-- Central Pillar -->
+    <rect x="-8" y="-10" width="16" height="150" rx="6" fill="#f8fafc" />
+    <!-- Pillar Base -->
+    <path d="M-60,140 L60,140 L45,125 L-45,125 Z" fill="#94a3b8" />
+    <rect x="-70" y="140" width="140" height="12" rx="6" fill="#f8fafc" />
+
+    <!-- Scale Fulcrum Point -->
+    <circle cx="0" cy="0" r="16" fill="url(#gold)" stroke="#ffffff" stroke-width="4" />
+
+    <!-- Cross Beam -->
+    <rect x="-140" y="-8" width="280" height="14" rx="6" fill="#ffffff" />
+
+    <!-- Left Pan -->
+    <line x1="-120" y1="6" x2="-150" y2="75" stroke="#cbd5e1" stroke-width="4" />
+    <line x1="-120" y1="6" x2="-90" y2="75" stroke="#cbd5e1" stroke-width="4" />
+    <path d="M-170,75 C-170,100 -70,100 -70,75 Z" fill="url(#gold)" stroke="#ffffff" stroke-width="3" />
+
+    <!-- Right Pan -->
+    <line x1="120" y1="6" x2="90" y2="75" stroke="#cbd5e1" stroke-width="4" />
+    <line x1="120" y1="6" x2="150" y2="75" stroke="#cbd5e1" stroke-width="4" />
+    <path d="M70,75 C70,100 170,100 170,75 Z" fill="url(#gold)" stroke="#ffffff" stroke-width="3" />
+  </g>
+
+  <!-- Wheat stalk in center behind fulcrum -->
+  <g transform="translate(256, 120)">
+    <path d="M0,70 Q-15,30 -5,-15 Q0,-35 0,-40 Q0,-35 5,-15 Q15,30 0,70 Z" fill="url(#gold)" />
+    <!-- Wheat ears left -->
+    <ellipse cx="-22" cy="15" rx="18" ry="8" transform="rotate(-35 -22 15)" fill="url(#gold)" />
+    <ellipse cx="-26" cy="-10" rx="18" ry="8" transform="rotate(-35 -26 -10)" fill="url(#gold)" />
+    <!-- Wheat ears right -->
+    <ellipse cx="22" cy="15" rx="18" ry="8" transform="rotate(35 22 15)" fill="url(#gold)" />
+    <ellipse cx="26" cy="-10" rx="18" ry="8" transform="rotate(35 26 -10)" fill="url(#gold)" />
+  </g>
+
+  <!-- Urdu and English Text Badge at bottom -->
+  <g transform="translate(256, 420)">
+    <rect x="-160" y="-28" width="320" height="56" rx="28" fill="#042f2e" stroke="#10b981" stroke-width="2" />
+    <text x="0" y="-4" text-anchor="middle" fill="#f8fafc" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="800" letter-spacing="2">MANDI ERP</text>
+    <text x="0" y="18" text-anchor="middle" fill="#6ee7b7" font-family="'Noto Nastaliq Urdu', serif" font-size="14" font-weight="600">غلہ منڈی سافٹ ویئر</text>
+  </g>
+</svg>

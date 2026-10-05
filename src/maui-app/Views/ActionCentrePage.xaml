@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:GrainMarket.ViewModels"
+             xmlns:models="clr-namespace:GrainMarket.Models"
+             x:Class="GrainMarket.Views.ActionCentrePage"
+             x:DataType="viewModels:ActionCentreViewModel"
+             BackgroundColor="#F8FAFC"
+             Title="Action Centre">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <Border BackgroundColor="#0F172A" StrokeThickness="0" StrokeShape="RoundRectangle 12" Padding="14">
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="⚡ Action Centre (Approval Workflow &amp; Direct Print)"
+                           TextColor="White"
+                           FontSize="15"
+                           FontAttributes="Bold" />
+                    <Label Text="Pending vouchers do not alter stock until approved by Admin/Owner"
+                           TextColor="#94A3B8"
+                           FontSize="11" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- PENDING VOUCHERS -->
+            <Label Text="Pending Approvals (انتظار منظوری)" FontSize="14" FontAttributes="Bold" TextColor="#B45309" />
+
+            <CollectionView ItemsSource="{Binding PendingPurchases}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Purchase">
+                        <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="12" Margin="0,0,0,8">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <VerticalStackLayout Spacing="3">
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Label Text="{Binding VoucherNo}" FontAttributes="Bold" TextColor="#064E3B" FontSize="13" />
+                                        <Border BackgroundColor="#FEF3C7" StrokeThickness="0" StrokeShape="RoundRectangle 4" Padding="6,1">
+                                            <Label Text="Pending" TextColor="#92400E" FontSize="9" FontAttributes="Bold" />
+                                        </Border>
+                                    </HorizontalStackLayout>
+                                    <Label Text="{Binding PartyName}" FontAttributes="Bold" FontSize="12" TextColor="#0F172A" />
+                                    <Label Text="{Binding ItemName, StringFormat='Jins: {0}'}" FontSize="11" TextColor="#64748B" />
+                                    <Label Text="{Binding TotalAmount, StringFormat='PKR {0:N0}'}" FontAttributes="Bold" FontSize="13" TextColor="#059669" />
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                    <Button Text="✓ Approve"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ActionCentreViewModel}}, Path=ApproveCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#059669"
+                                            HeightRequest="36"
+                                            FontSize="11"
+                                            Padding="12,0" />
+                                    <Button Text="🖨️ Direct Print"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ActionCentreViewModel}}, Path=DirectPrintCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#0F172A"
+                                            HeightRequest="36"
+                                            FontSize="11"
+                                            Padding="12,0" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- APPROVED VOUCHERS -->
+            <Label Text="Approved Vouchers (منظور شدہ پرچیاں)" FontSize="14" FontAttributes="Bold" TextColor="#064E3B" Margin="0,8,0,0" />
+
+            <CollectionView ItemsSource="{Binding ApprovedPurchases}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Purchase">
+                        <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="12" Margin="0,0,0,8">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <VerticalStackLayout Spacing="3">
+                                    <Label Text="{Binding VoucherNo}" FontAttributes="Bold" TextColor="#064E3B" FontSize="13" />
+                                    <Label Text="{Binding PartyName}" FontAttributes="Bold" FontSize="12" TextColor="#0F172A" />
+                                    <Label Text="{Binding TotalAmount, StringFormat='PKR {0:N0}'}" FontAttributes="Bold" FontSize="12" TextColor="#059669" />
+                                </VerticalStackLayout>
+
+                                <HorizontalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                    <Button Text="🖨️ Thermal"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ActionCentreViewModel}}, Path=DirectPrintCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#064E3B"
+                                            HeightRequest="36"
+                                            FontSize="10" />
+                                    <Button Text="💬 WhatsApp"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ActionCentreViewModel}}, Path=ShareWhatsAppCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#25D366"
+                                            HeightRequest="36"
+                                            FontSize="10" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

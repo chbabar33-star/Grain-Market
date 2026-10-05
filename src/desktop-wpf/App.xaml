@@ -1,0 +1,31 @@
+<Application x:Class="MandiERP.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- Modern Theme Colors for Pakistani Grain Market Desktop -->
+        <SolidColorBrush x:Key="PrimaryGreen" Color="#064E3B" />
+        <SolidColorBrush x:Key="AccentGreen" Color="#059669" />
+        <SolidColorBrush x:Key="DarkSlate" Color="#0F172A" />
+        <SolidColorBrush x:Key="CardBackground" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="BorderColor" Color="#E2E8F0" />
+        <SolidColorBrush x:Key="TextPrimary" Color="#0F172A" />
+        <SolidColorBrush x:Key="TextMuted" Color="#64748B" />
+        
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryGreen}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Padding" Value="14,8" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+    </Application.Resources>
+</Application>

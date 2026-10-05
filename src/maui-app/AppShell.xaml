@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GrainMarket.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:GrainMarket.Views"
+    Title="Mandi ERP - Grain Market"
+    Shell.BackgroundColor="#064E3B"
+    Shell.ForegroundColor="White"
+    Shell.TitleColor="White">
+
+    <TabBar>
+        <Tab Title="Dashboard" Icon="dashboard.png">
+            <ShellContent ContentTemplate="{DataTemplate views:DashboardPage}" Route="DashboardPage" />
+        </Tab>
+        <Tab Title="Weighbridge" Icon="scale.png">
+            <ShellContent ContentTemplate="{DataTemplate views:WeighbridgePage}" Route="WeighbridgePage" />
+        </Tab>
+        <Tab Title="Action Centre" Icon="action.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ActionCentrePage}" Route="ActionCentrePage" />
+        </Tab>
+        <Tab Title="Parties" Icon="users.png">
+            <ShellContent ContentTemplate="{DataTemplate views:PartiesPage}" Route="PartiesPage" />
+        </Tab>
+        <Tab Title="Cloud Sync" Icon="sync.png">
+            <ShellContent ContentTemplate="{DataTemplate views:SyncPage}" Route="SyncPage" />
+        </Tab>
+    </TabBar>
+
+</Shell>

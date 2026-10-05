@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- Multi-targeting: net8.0-windows for Win10/Win11, net48 for Windows 7 SP1 / Win8 / Win10 / Win11 -->
+    <TargetFrameworks>net8.0-windows;net48</TargetFrameworks>
+    <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>MandiERP</AssemblyName>
+    <RootNamespace>MandiERP</RootNamespace>
+
+    <!-- Windows 7 SP1 (32-bit & 64-bit), 8, 10, 11 Eligibility -->
+    <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+
+    <!-- Single-File Standalone Executable Configuration for Modern Runtimes -->
+    <PublishSingleFile Condition="'$(TargetFramework)' == 'net8.0-windows'">true</PublishSingleFile>
+    <SelfContained Condition="'$(TargetFramework)' == 'net8.0-windows'">true</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <!-- Cross-Platform SQLite Engine (100% compatible with Windows 7, 8, 10, 11) -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.8" />
+  </ItemGroup>
+
+</Project>

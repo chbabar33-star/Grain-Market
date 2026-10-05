@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:GrainMarket.ViewModels"
+             xmlns:models="clr-namespace:GrainMarket.Models"
+             x:Class="GrainMarket.Views.DashboardPage"
+             x:DataType="viewModels:MainViewModel"
+             BackgroundColor="#F8FAFC"
+             Title="Executive Dashboard">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- CONNECTION DETECTION STATUS STRIP -->
+            <Border BackgroundColor="{Binding ConnectionBadgeColor}"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="14,10">
+                <Grid ColumnDefinitions="*, Auto">
+                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                        <Label Text="{Binding ConnectionBadgeText}"
+                               TextColor="White"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Button Grid.Column="1"
+                            Text="⚡ SYNC NOW"
+                            Command="{Binding ManualSyncCommand}"
+                            IsEnabled="{Binding IsSyncing, Converter={StaticResource InvertedBoolConverter}}"
+                            BackgroundColor="#022C22"
+                            TextColor="#34D399"
+                            FontAttributes="Bold"
+                            FontSize="11"
+                            HeightRequest="34"
+                            Padding="12,0" />
+                </Grid>
+            </Border>
+
+            <!-- BUSINESS HEADER -->
+            <Border BackgroundColor="#064E3B"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    Padding="18">
+                <Grid ColumnDefinitions="*, Auto">
+                    <VerticalStackLayout Spacing="3">
+                        <Label Text="{Binding BusinessName}"
+                               TextColor="White"
+                               FontSize="18"
+                               FontAttributes="Bold" />
+                        <Label Text="غلہ منڈی نظام - 100% آف لائن + آٹو سنک (.NET MAUI 8)"
+                               TextColor="#A7F3D0"
+                               FontSize="12" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="1"
+                           Text="{Binding ActiveDeviceRole}"
+                           TextColor="#D1FAE5"
+                           FontSize="11"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- KPI STATS CARDS -->
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="12" RowDefinitions="Auto, Auto" RowSpacing="12">
+                <!-- Card 1: Today Purchase -->
+                <Border Grid.Row="0" Grid.Column="0" BackgroundColor="White" StrokeShape="RoundRectangle 12" Stroke="#E2E8F0" Padding="14">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="TODAY PURCHASE" FontSize="10" TextColor="#64748B" FontAttributes="Bold" />
+                        <Label Text="{Binding TodayPurchaseTotal}" FontSize="16" TextColor="#0F172A" FontAttributes="Bold" />
+                        <Label Text="{Binding TodayPurchaseWeight}" FontSize="11" TextColor="#059669" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Card 2: Total Vouchers -->
+                <Border Grid.Row="0" Grid.Column="1" BackgroundColor="White" StrokeShape="RoundRectangle 12" Stroke="#E2E8F0" Padding="14">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="TOTAL VOUCHERS" FontSize="10" TextColor="#64748B" FontAttributes="Bold" />
+                        <Label Text="{Binding TotalVouchersCount}" FontSize="16" TextColor="#0F172A" FontAttributes="Bold" />
+                        <Label Text="Local SQLite File" FontSize="11" TextColor="#64748B" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- RECENT VOUCHERS LIST -->
+            <Label Text="Recent Vouchers from SQLite"
+                   FontSize="15"
+                   FontAttributes="Bold"
+                   TextColor="#0F172A" />
+
+            <CollectionView ItemsSource="{Binding RecentPurchases}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Purchase">
+                        <Border BackgroundColor="White"
+                                Stroke="#E2E8F0"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="12"
+                                Margin="0,0,0,8">
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <VerticalStackLayout Grid.Column="0" WidthRequest="90" Spacing="2">
+                                    <Label Text="{Binding VoucherNo}" FontAttributes="Bold" FontSize="12" TextColor="#064E3B" />
+                                    <Label Text="{Binding Date}" FontSize="10" TextColor="#64748B" />
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" Padding="8,0">
+                                    <Label Text="{Binding PartyName}" FontAttributes="Bold" FontSize="12" TextColor="#0F172A" />
+                                    <Label Text="{Binding ItemName}" FontSize="11" TextColor="#475569" />
+                                    <Label Text="{Binding NetWeight, StringFormat='Clean Wt: {0:N0} KG'}" FontSize="10" TextColor="#059669" />
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="2" HorizontalOptions="End" Spacing="2">
+                                    <Label Text="{Binding TotalAmount, StringFormat='PKR {0:N0}'}" FontAttributes="Bold" FontSize="13" TextColor="#0F172A" />
+                                    <Border BackgroundColor="#FEF3C7" StrokeThickness="0" StrokeShape="RoundRectangle 6" Padding="6,2" HorizontalOptions="End">
+                                        <Label Text="{Binding Status}" FontSize="9" TextColor="#92400E" FontAttributes="Bold" />
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:GrainMarket.ViewModels"
+             xmlns:models="clr-namespace:GrainMarket.Models"
+             x:Class="GrainMarket.Views.PartiesPage"
+             x:DataType="viewModels:PartiesViewModel"
+             BackgroundColor="#F8FAFC"
+             Title="Party Directory">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+        <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="14">
+            <VerticalStackLayout Spacing="3">
+                <Label Text="Party Information &amp; Contact Directory (پارٹی کوائف)" FontSize="15" FontAttributes="Bold" TextColor="#0F172A" />
+                <Label Text="Registered Farmers, Suppliers, and Mills (Party Ledgers removed per locked requirement)" FontSize="11" TextColor="#64748B" />
+            </VerticalStackLayout>
+        </Border>
+
+        <CollectionView ItemsSource="{Binding PartiesList}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Party">
+                    <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 10" Padding="12" Margin="0,0,0,8">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="13" TextColor="#0F172A" />
+                                <Label Text="{Binding NameUrdu}" FontSize="12" TextColor="#064E3B" />
+                                <Label Text="{Binding Phone, StringFormat='Phone: {0}'}" FontSize="11" TextColor="#64748B" />
+                                <Label Text="{Binding Address}" FontSize="10" TextColor="#94A3B8" />
+                            </VerticalStackLayout>
+
+                            <Border Grid.Column="1" BackgroundColor="#E0F2FE" StrokeThickness="0" StrokeShape="RoundRectangle 6" Padding="8,3" VerticalOptions="Center">
+                                <Label Text="{Binding Type}" FontSize="10" TextColor="#0369A1" FontAttributes="Bold" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+
+</ContentPage>
